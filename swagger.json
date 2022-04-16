@@ -33,34 +33,11 @@
                 "produces" : ["application/json"],
                 "parameters" : [
                     {
-                        "lat" : {
-                            "type" : "number",
-                            "description" : "Latitude of the point",
-                            "required" : true
-                        },
-                        "lng" : {
-                            "type" : "number",
-                            "description" : "Longitude of the point",
-                            "required" : true
-                        },
-                        "icon" : {
-                            "type" : "string",
-                            "description" : "Icon of the point"
-                        },
-                        "title" : {
-                            "type" : "string",
-                            "description" : "Title of the point",
-                            "required" : true
-                        },
-                        "description" : {
-                            "type" : "string",
-                            "description" : "Description of the point",
-                            "required" : true
-                        },
-                        "email" : {
-                            "type" : "string",
-                            "description" : "Email of the point owner"
-                        }
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "Point Object",
+                        "required" : true,
+                        "type" : "object"
                     }
                 ],
                 "responses" : {
@@ -84,15 +61,11 @@
                 "produces" : ["application/json"],
                 "parameters" : [
                     {
-                        "title" : {
-                            "type" : "string",
-                            "description" : "Name of the point",
-                            "required" : true
-                        },
-                        "email" : {
-                            "type" : "string",
-                            "description" : "Email of the point owner"
-                        }
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "Point Object",
+                        "required" : true,
+                        "type" : "object"
                     }
                 ],
                 "responses" : {
@@ -119,20 +92,113 @@
                 "produces" : ["application/json"],
                 "parameters" : [
                     {
-                        "description" : {
-                            "type" : "string",
-                            "description" : "Description of the point",
-                            "required" : true
-                        },
-                        "title" : {
-                            "type" : "string",
-                            "description" : "Name of the point",
-                            "required" : true
-                        },
-                        "email" : {
-                            "type" : "string",
-                            "description" : "Email of the point owner"
-                        }
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "Point Object",
+                        "required" : true,
+                        "type" : "object"
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            }
+        },
+        "/users" : {
+            "get" : {
+                "summary" : "Get all users in DB",
+                "description" : "Returns a list with all users",
+                "produces" : ["application/json"],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Add new users",
+                "description" : "Add new oint to public points DB",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "User Object",
+                        "required" : true,
+                        "type" : "object"
+                    }
+                ],
+                "responses" : {
+                    "201" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete the user with the given email",
+                "description" : "Delete the user with the email",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "User Object",
+                        "required" : true,
+                        "type" : "object"
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the user with the given email",
+                "description" : "Update the users description with the given email",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "User Object",
+                        "required" : true,
+                        "type" : "object"
                     }
                 ],
                 "responses" : {
