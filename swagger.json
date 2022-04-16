@@ -219,6 +219,70 @@
                     }
                 }
             }
+        },
+        "/users/points" : {
+            "post" : {
+                "summary" : "Push the object to the user mail",
+                "description" : "Add point to user",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "User Object",
+                        "required" : true,
+                        "type" : "object"
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Remove the point from the user mail",
+                "description" : "Remove point from user",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "User",
+                        "description" : "User Object",
+                        "required" : true,
+                        "type" : "object"
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            }
         }
     }
 }
