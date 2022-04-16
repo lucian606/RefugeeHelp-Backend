@@ -1,0 +1,158 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+        "version": "1.0.0",
+        "title": "RefugeeHelp API",
+        "contact": {
+            "email": "abc@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:5000",
+    "basePath": "/",
+    "paths" : {
+        "/points" : {
+            "get" : {
+                "summary" : "Get all points in DB",
+                "description" : "Get all public points available for all users",
+                "produces" : ["application/json"],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Add new point",
+                "description" : "Add new point to public points DB",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "lat" : {
+                            "type" : "number",
+                            "description" : "Latitude of the point",
+                            "required" : true
+                        },
+                        "lng" : {
+                            "type" : "number",
+                            "description" : "Longitude of the point",
+                            "required" : true
+                        },
+                        "icon" : {
+                            "type" : "string",
+                            "description" : "Icon of the point"
+                        },
+                        "title" : {
+                            "type" : "string",
+                            "description" : "Title of the point",
+                            "required" : true
+                        },
+                        "description" : {
+                            "type" : "string",
+                            "description" : "Description of the point",
+                            "required" : true
+                        },
+                        "email" : {
+                            "type" : "string",
+                            "description" : "Email of the point owner"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "201" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete the point with the given name",
+                "description" : "Delete the point with the given name",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "title" : {
+                            "type" : "string",
+                            "description" : "Name of the point",
+                            "required" : true
+                        },
+                        "email" : {
+                            "type" : "string",
+                            "description" : "Email of the point owner"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the point with the given name",
+                "description" : "Update the point description with the given name",
+                "produces" : ["application/json"],
+                "parameters" : [
+                    {
+                        "description" : {
+                            "type" : "string",
+                            "description" : "Description of the point",
+                            "required" : true
+                        },
+                        "title" : {
+                            "type" : "string",
+                            "description" : "Name of the point",
+                            "required" : true
+                        },
+                        "email" : {
+                            "type" : "string",
+                            "description" : "Email of the point owner"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Bad request"
+                    },
+                    "403" : {
+                        "description" : "Forbidden"
+                    },
+                    "404" : {
+                        "description" : "Not found"
+                    },
+                    "500" : {
+                        "description" : "Internal server error"
+                    }
+                }
+            }
+        }
+    }
+}
