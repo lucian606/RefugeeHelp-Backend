@@ -15,8 +15,21 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/:email', (req, res) => {
+    try {
+        Users.findOne({email : req.params.email}).then(user => {
+            res.send(user.role);
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500);
+        res.send({"Message" : "Error getting user"});
+    }
+});
+
 router.post('/', (req, res) => {
     const userBody = req.body;
+    console.log("registering user: " + userBody.email);
     console.log(userBody);
     Users.create(userBody, (err, db) => {
         if (err) {
