@@ -118,7 +118,7 @@ router.post('/points', (req, res) => {
     if (!email || !lat || !lng || !title || !description) {
         console.log("invalid body");
         res.status(400);
-        res.send({"Message" : "Invalid body"});
+        res.send({"Message" : "Please fill all fields"});
     }
     else if (isNaN(lat) || isNaN(lng)) {
         console.log("lat or lng is not a number");
