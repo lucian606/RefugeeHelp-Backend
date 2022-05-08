@@ -6,6 +6,7 @@ const app = express();
 const port = 5000;
 const pointRouter = require('./routes/pointRouter');
 const userRouter = require('./routes/userRouter');
+const emailRouter = require('./routes/emailRouter');
 const cors = require('cors');
 
 mongoose.Promise = global.Promise;
@@ -22,5 +23,6 @@ app.use(cors());
 
 app.use('/points', pointRouter);
 app.use('/users', userRouter);
+app.use('/emails', emailRouter);
 
 app.listen(port, () => console.log(`REST API server running at http://localhost:${port}`));
