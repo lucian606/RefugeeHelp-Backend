@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 require('dotenv').config();
-var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD
     }
-});
+}));
 
 // htttps://localhost:5000/emails/
 router.post('/', (req, res) => {
