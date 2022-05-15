@@ -9,12 +9,30 @@ const userRouter = require('./routes/userRouter');
 const emailRouter = require('./routes/emailRouter');
 const cors = require('cors');
 
+const pino = require('pino');
+const pretty = require('pino-pretty');
+const pinoLoki = require('pino-loki');
+
+const options = {
+    hostname: 'http://loki:3100',
+    applicationTag: 'backend',
+    timeout:3000,
+    silenceErrors:false 
+}
+
+const streams = [
+    { level: 'info', stream: pretty() },
+    { level: 'info', stream: pinoLoki.createWriteStreamSync(options) },
+];
+
+let logger = pino({level:'info'}, pino.multistream(streams));
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/refugeedb', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://database:27017/refugeedb', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.log("Connected to DB"));
+db.on('error', (error) => logger.info(error));
+db.once('open', () => logger.info({message:"DB connected", tags: {someCustomTag:"mongoose"}}));
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -25,4 +43,4 @@ app.use('/points', pointRouter);
 app.use('/users', userRouter);
 app.use('/emails', emailRouter);
 
-app.listen(port, () => console.log(`REST API server running at http://localhost:${port}`));
+app.listen(port, () => logger.info({line:"Backend Running", tags: {someCustomTag:"nodejs"}}));

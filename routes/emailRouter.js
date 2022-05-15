@@ -3,6 +3,25 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 require('dotenv').config();
+
+const pino = require('pino');
+const pretty = require('pino-pretty');
+const pinoLoki = require('pino-loki');
+
+const options = {
+    hostname: 'http://loki:3100',
+    applicationTag: 'backend',
+    timeout:3000,
+    silenceErrors:false 
+}
+
+const streams = [
+    { level: 'info', stream: pretty() },
+    { level: 'info', stream: pinoLoki.createWriteStreamSync(options) },
+];
+
+let logger = pino({level:'info'}, pino.multistream(streams));
+
 var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
@@ -11,8 +30,11 @@ var transporter = nodemailer.createTransport(smtpTransport({
     }
 }));
 
+
+
 // htttps://localhost:5000/emails/
 router.post('/', (req, res) => {
+    
     const email = req.body.email;
     const message = req.body.message;
     const subject = req.body.subject;
@@ -39,8 +61,10 @@ router.post('/', (req, res) => {
                     res.send({"Message" : "Email sent"});
                 }
             });
+            logger.info({tags: {collection:"emails",operation:"post",status:"success"}});
         } catch (err) {
             console.log(err);
+            logger.info({tags: {collection:"points",operation:"post",status:"error"}});
         }
     }
 });
